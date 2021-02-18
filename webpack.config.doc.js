@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // webpack4建议用 mini-css-extract-plugin 抽离模块中的css
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const sourceDirectory = path.resolve(__dirname, 'docs');
@@ -15,7 +15,7 @@ const plugins = [
   new HtmlWebpackPlugin({
     filename: 'index.html',
     inject: true,
-    template: path.resolve(__dirname, 'doc/index.html'),
+    template: path.resolve(__dirname, 'docs/index.html'),
     minify: {
       collapseWhitespace: !isDev,
       removeComments: !isDev,
@@ -23,24 +23,25 @@ const plugins = [
     },
   }),
   new webpack.HotModuleReplacementPlugin(),
-  new MiniCssExtractPlugin({filename: 'cakeUi.css'}),
+  new MiniCssExtractPlugin({ filename: 'cakeUi.css' }),
   new webpack.optimize.ModuleConcatenationPlugin(),
 ];
 
 if (!isDev) {
   plugins.push(
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }));
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    })
+  );
   plugins.push(
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
-            warnings: false,
+          warnings: false,
         },
       },
       sourceMap: false,
-    }),
+    })
   );
 }
 
@@ -56,10 +57,10 @@ module.exports = {
   },
   devServer: {
     hot: true,
-    contentBase: [sourceDirectory,styleDirectory],
+    contentBase: [sourceDirectory, styleDirectory],
     watchContentBase: true,
     open: true,
-    host:"localhost",//让局域网内的其他用户访问自己的设备,默认localhost
+    host: 'localhost', //让局域网内的其他用户访问自己的设备,默认localhost
     port: 8002,
   },
   module: {
@@ -68,9 +69,9 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: [/node_modules/],
         use: [
-            {
-                loader: 'babel-loader',
-            },
+          {
+            loader: 'babel-loader',
+          },
         ],
       },
       {
@@ -78,22 +79,22 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
-            loader: "less-loader",
+            loader: 'less-loader',
           },
         ],
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: [/\.gif$/, /\.jpe?g$/, /\.png$/],
         loader: 'url-loader',
         query: {
-          limit: 10000,//小于10K的转为base64,大于10K的还是原图片
+          limit: 10000, //小于10K的转为base64,大于10K的还是原图片
           name: 'static/img/[name].[hash:8].[ext]',
         },
       },
@@ -113,5 +114,5 @@ module.exports = {
     },
     extensions: ['.js', '.jsx', '.less'], //后缀名自动补全
   },
-  plugins
+  plugins,
 };

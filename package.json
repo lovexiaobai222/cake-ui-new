@@ -22,7 +22,7 @@
     "release": "standard-version --sign",
     "test": "cross-env BABEL_OUTPUT=commonjs jest",
     "codecov": "codecov",
-    "startDoc": "webpack-dev-server --inline --content-base doc/ --config webpack.config.doc.js",
+    "startDoc": "webpack-dev-server --inline --content-base docs/ --config webpack.config.doc.js",
     "buildDoc": "cross-env NODE_ENV=production webpack --config webpack.config.doc.js",
     "website": "run-s website:clean website:build",
     "website:clean": "rimraf doc/dist",
