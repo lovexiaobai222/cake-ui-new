@@ -5,8 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const sourceDirectory = path.resolve(__dirname, 'doc');
-const targetDirectory = path.resolve(__dirname, 'doc/dist');
+const sourceDirectory = path.resolve(__dirname, 'docs');
+const targetDirectory = path.resolve(__dirname, 'docs/dist');
 const styleDirectory = path.resolve(__dirname, 'style');
 
 const isDev = process.env.NODE_ENV !== 'production';
@@ -59,7 +59,7 @@ module.exports = {
     contentBase: [sourceDirectory,styleDirectory],
     watchContentBase: true,
     open: true,
-    host:"192.168.0.61",//让局域网内的其他用户访问自己的设备,默认localhost
+    host:"localhost",//让局域网内的其他用户访问自己的设备,默认localhost
     port: 8002,
   },
   module: {

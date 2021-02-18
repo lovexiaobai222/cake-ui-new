@@ -23,17 +23,17 @@
     "test": "cross-env BABEL_OUTPUT=commonjs jest",
     "codecov": "codecov",
     "startDoc": "webpack-dev-server --inline --content-base doc/ --config webpack.config.doc.js",
-    "buildDoc:commonjs": "cross-env NODE_ENV=production webpack --config webpack.config.doc.js",
+    "buildDoc": "cross-env NODE_ENV=production webpack --config webpack.config.doc.js",
     "website": "run-s website:clean website:build",
     "website:clean": "rimraf doc/dist",
     "website:build": "cross-env NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lcwebgroup/cake-ui.git"
+    "url": "git+https://github.com/lovexiaobai222/cake-ui-new.git"
   },
   "homePage": {
-    "url": "https://lcwebgroup.github.io/cake-ui/doc/dist/index.html#/"
+    "url": "https://lovexiaobai222.github.io/cake-ui-new/doc/dist/index.html#/"
   },
   "author": "crisBai",
   "license": "MIT",
