@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import CodeStatus from '../../../components/codeStatus.jsx';
 import Doc from '../../../components/doc.jsx';
 import { PopForm, CheckTagGroup, TransferTag, WangEditor } from 'cake-ui/src';
-import { Form, Button, InputNumber } from 'antd';
+import { Form, Button, InputNumber, Select } from 'antd';
 import moment from 'moment';
 // 自定义表单组件
 const FormItem = Form.Item;
 
-//组件属性
+// 组件属性
 const propsConfig = [
   {
     key: 'initData',
@@ -222,8 +222,7 @@ const itemListConfig = [
   {
     key: 'picker',
     param: 'picker',
-    explain:
-      "关于时间的选择类型：'date' 'week' 'month' 'quarter' 'year'（仅当type为date时有效）",
+    explain: "关于时间的选择类型：'date' 'week' 'month' 'quarter' 'year'（仅当type为date时有效）",
     type: 'string',
     defaultValue: 'date',
   },
@@ -318,8 +317,7 @@ const buttonConfig = [
   {
     key: 'style',
     param: 'style',
-    explain:
-      '按钮配置样式，可控制按钮居中、右对齐（ justify-content: flex-end;）',
+    explain: '按钮配置样式，可控制按钮居中、右对齐（ justify-content: flex-end;）',
     type: 'object',
     defaultValue: '{}',
   },
@@ -334,147 +332,140 @@ export default class PopFormTest extends React.Component {
     };
   }
 
-  initData1 = () => {
-    return {
-      title: '简单版',
-      modalWidth: 560,
-      itemList: [
-        {
-          name: '文本框',
-          type: 'text',
-          keyName: 'text',
-          rules: [{ required: true, message: '请填写', whitespace: true }],
-          placeholder: '请输入',
-          onChange: (e, form) => {},
-        },
-        {
-          name: '数字框',
-          type: 'number',
-          keyName: 'number',
-          rules: [{ required: true, message: '请填写' }],
-          placeholder: '请输入',
-        },
-        {
-          name: '密码框',
-          type: 'password',
-          keyName: 'pwd',
-          rules: [{ required: true, message: '请填写', whitespace: true }],
-          placeholder: '请输入',
-        },
-        {
-          name: '验证码',
-          type: 'verify',
-          keyName: 'verifyCode',
-          rules: [{ required: true, message: '请填写', whitespace: true }],
-          placeholder: '请输入',
-          onSearch: (e, form, callBack) => {
-            console.log(e);
-            callBack();
-          },
-        },
-        {
-          name: '文本域',
-          type: 'textarea',
-          keyName: 'descp',
-          placeholder: '请输入',
-        },
-        {
-          name: '单选框',
-          type: 'radio',
-          keyName: 'radioTest',
-          defaultValue: '1',
-          options: [
-            { value: '1', label: '测试1' },
-            { value: '2', label: '测试2' },
-            { value: '3', label: '测试3' },
-          ],
-          rules: [{ required: true, message: '请选择' }],
-          placeholder: '请选择',
-        },
-        {
-          name: '复选框',
-          type: 'checkbox',
-          keyName: 'checkboxTest',
-          defaultValue: ['1'],
-          options: [
-            { value: '1', label: '复选测试1' },
-            { value: '2', label: '复选测试2' },
-          ],
-          rules: [{ required: true, message: '请选择' }],
-          placeholder: '请选择',
-        },
-        {
-          name: '下拉框',
-          type: 'select',
-          keyName: 'selectTest',
-          defaultValue: '1',
-          options: [
-            { value: '1', label: '选择1' },
-            { value: '2', label: '选择2' },
-          ],
-          rules: [{ required: true, message: '请选择' }],
-          placeholder: '请选择',
-          onChange: (value, option, form) => {},
-        },
-        {
-          name: '上传文件',
-          type: 'file',
-          keyName: 'file',
-          placeholder: '请上传',
-          onChange: (e, form) => {},
-        },
-        {
-          name: '上传附件',
-          type: 'file',
-          keyName: 'uploadAttachments',
-          placeholder: '请上传附件',
-          // defaultValue: item.uploadAttachments ? item.uploadAttachments : "",
-          rules: [{ required: true, message: '请上传附件' }],
-          beforeUpload: (file, fileList, form) => {
-            // 上传文件接口
-            // Api.upload({file: file}).then(
-            //     res => {
-            //         const url =  res.content[0];
-            //         form.setFieldsValue({'uploadAttachments': url}) ;
-            //     }
-            // );
-            // 返回 false 后变为手动上传文件
-            return false;
-          },
-        },
-        {
-          name: '省份',
-          type: 'custom',
-          keyName: 'provinceId',
-          //   defaultValue: item.provinceId ? item.provinceId.split(',') : [],
-          render: (form) => {
-            return (
-              <Select
-                mode="multiple"
-                placeholder="请选择省份"
-                allowClear
-                filterOption={(inputValue, option) => {
-                  return `${option.children}`.indexOf(inputValue) > -1;
-                }}
-              >
-                <Option key={'0001'}>北京市</Option>
-                <Option key={'0002'}>四川省</Option>
-                <Option key={'0003'}>河北省</Option>
-                <Option key={'0004'}>湖南省</Option>
-              </Select>
-            );
-          },
-          rules: [{ required: true, message: '请选择省份' }],
-        },
-      ],
-      onCancel: () => {
-        this.setState({ modalVisible1: false });
+  initData1 = () => ({
+    title: '简单版',
+    modalWidth: 560,
+    itemList: [
+      {
+        name: '文本框',
+        type: 'text',
+        keyName: 'text',
+        rules: [{ required: true, message: '请填写', whitespace: true }],
+        placeholder: '请输入',
+        onChange: (e, form) => {},
       },
-      onOk: (values) => {
-        console.log(values, '---onOk');
+      {
+        name: '数字框',
+        type: 'number',
+        keyName: 'number',
+        rules: [{ required: true, message: '请填写' }],
+        placeholder: '请输入',
       },
-    };
-  };
+      {
+        name: '密码框',
+        type: 'password',
+        keyName: 'pwd',
+        rules: [{ required: true, message: '请填写', whitespace: true }],
+        placeholder: '请输入',
+      },
+      {
+        name: '验证码',
+        type: 'verify',
+        keyName: 'verifyCode',
+        rules: [{ required: true, message: '请填写', whitespace: true }],
+        placeholder: '请输入',
+        onSearch: (e, form, callBack) => {
+          console.log(e);
+          callBack();
+        },
+      },
+      {
+        name: '文本域',
+        type: 'textarea',
+        keyName: 'descp',
+        placeholder: '请输入',
+      },
+      {
+        name: '单选框',
+        type: 'radio',
+        keyName: 'radioTest',
+        defaultValue: '1',
+        options: [
+          { value: '1', label: '测试1' },
+          { value: '2', label: '测试2' },
+          { value: '3', label: '测试3' },
+        ],
+        rules: [{ required: true, message: '请选择' }],
+        placeholder: '请选择',
+      },
+      {
+        name: '复选框',
+        type: 'checkbox',
+        keyName: 'checkboxTest',
+        defaultValue: ['1'],
+        options: [
+          { value: '1', label: '复选测试1' },
+          { value: '2', label: '复选测试2' },
+        ],
+        rules: [{ required: true, message: '请选择' }],
+        placeholder: '请选择',
+      },
+      {
+        name: '下拉框',
+        type: 'select',
+        keyName: 'selectTest',
+        defaultValue: '1',
+        options: [
+          { value: '1', label: '选择1' },
+          { value: '2', label: '选择2' },
+        ],
+        rules: [{ required: true, message: '请选择' }],
+        placeholder: '请选择',
+        onChange: (value, option, form) => {},
+      },
+      {
+        name: '上传文件',
+        type: 'file',
+        keyName: 'file',
+        placeholder: '请上传',
+        onChange: (e, form) => {},
+      },
+      {
+        name: '上传附件',
+        type: 'file',
+        keyName: 'uploadAttachments',
+        placeholder: '请上传附件',
+        // defaultValue: item.uploadAttachments ? item.uploadAttachments : "",
+        rules: [{ required: true, message: '请上传附件' }],
+        beforeUpload: (file, fileList, form) =>
+          // 上传文件接口
+          // Api.upload({file: file}).then(
+          //     res => {
+          //         const url =  res.content[0];
+          //         form.setFieldsValue({'uploadAttachments': url}) ;
+          //     }
+          // );
+          // 返回 false 后变为手动上传文件
+          false,
+      },
+      {
+        name: '省份',
+        type: 'custom',
+        keyName: 'provinceId',
+        //   defaultValue: item.provinceId ? item.provinceId.split(',') : [],
+        render: form => (
+          <Select
+            mode="multiple"
+            placeholder="请选择省份"
+            allowClear
+            filterOption={(inputValue, option) => `${option.children}`.indexOf(inputValue) > -1}
+          >
+            <Option key="0001">北京市</Option>
+            <Option key="0002">四川省</Option>
+            <Option key="0003">河北省</Option>
+            <Option key="0004">湖南省</Option>
+          </Select>
+        ),
+        rules: [{ required: true, message: '请选择省份' }],
+      },
+    ],
+    onCancel: () => {
+      this.setState({ modalVisible1: false });
+    },
+    onOk: values => {
+      console.log(values, '---onOk');
+    },
+  });
 
   getInitialAddModal2 = async (update = '', item = {}) => {
     // if (update === "update") {
@@ -579,9 +570,7 @@ export default class PopFormTest extends React.Component {
           defaultValue: moment(),
           rules: [{ required: true, message: '请选择' }],
           placeholder: '请选择时间',
-          disabledDate: (current) => {
-            return current && current < moment('2020-05-14', 'YYYY-MM-DD');
-          },
+          disabledDate: current => current && current < moment('2020-05-14', 'YYYY-MM-DD'),
           onChange: (date, dateString, form) => {},
         },
         {
@@ -638,10 +627,7 @@ export default class PopFormTest extends React.Component {
           endKeyName: 'endTime',
           format: 'YYYY-MM-DD HH:mm:ss',
           showTime: {
-            defaultValue: [
-              moment('00:00:00', 'HH:mm:ss'),
-              moment('23:59:59', 'HH:mm:ss'),
-            ],
+            defaultValue: [moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')],
             format: 'HH:mm:ss',
           },
         },
@@ -650,65 +636,47 @@ export default class PopFormTest extends React.Component {
           type: 'custom',
           keyName: 'editor',
           rules: [{ required: true, message: '请填写' }],
-          render: () => (
-            <WangEditor
-            // style={{width:600,height:300}}
-            // uploadImgServer={this.dataUrl + UPLOAD_FILE_DATA}
-            // uploadImgParams={{login_yes:"01450afeea6c4048846ff8121aa8b764"}}
-            // uploadImgHooks={{
-            //     success: (xhr, editor, result)=>{
-            //         const res=JSON.parse(result)
-            //         const url = this.dataUrl + DOWNLOAD_FILE_DATA + "/" + res.content;
-            //         editor.cmd.do('insertHTML', `<img src="${  url  }"/>`);
-            //     }
-            // }}
-            />
-          ),
+          render: () => <WangEditor />,
         },
         {
           name: '自定义组合',
           type: 'custom',
           keyName: 'message',
           itemStyle: { marginBottom: 0 },
-          render: (form) => {
-            return (
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'nowrap',
-                  alignItems: 'center',
-                }}
+          render: form => (
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'nowrap',
+                alignItems: 'center',
+              }}
+            >
+              <FormItem
+                initialValue=""
+                rules={[{ required: false, message: '请选择' }]}
+                style={{ marginRight: 16 }}
               >
-                <FormItem
-                  initialValue=""
-                  rules={[{ required: false, message: '请选择' }]}
-                  style={{ marginRight: 16 }}
-                >
-                  <CheckTagGroup
-                    tags={[
-                      { value: '0', label: '>' },
-                      { value: '1', label: '<' },
-                      { value: '2', label: '=' },
-                    ]}
-                    tagStyle={{
-                      width: 45,
-                      height: 28,
-                      lineHeight: '28px',
-                      textAlign: 'center',
-                      border: '1px solid #ddd',
-                    }}
-                    type="radioWithCancel"
-                  />
-                </FormItem>
-                <FormItem
-                  initialValue=""
-                  rules={[{ required: false, message: '请输入' }]}
-                >
-                  <InputNumber min={0} placeholder="请输入" />
-                </FormItem>
-              </div>
-            );
-          },
+                <CheckTagGroup
+                  tags={[
+                    { value: '0', label: '>' },
+                    { value: '1', label: '<' },
+                    { value: '2', label: '=' },
+                  ]}
+                  tagStyle={{
+                    width: 45,
+                    height: 28,
+                    lineHeight: '28px',
+                    textAlign: 'center',
+                    border: '1px solid #ddd',
+                  }}
+                  type="radioWithCancel"
+                />
+              </FormItem>
+              <FormItem initialValue="" rules={[{ required: false, message: '请输入' }]}>
+                <InputNumber min={0} placeholder="请输入" />
+              </FormItem>
+            </div>
+          ),
         },
         // {
         // 	name: "天线/地线/投注金额（自加一）",
@@ -778,37 +746,35 @@ export default class PopFormTest extends React.Component {
       onCancel: () => {
         this.setState({ modalVisible2: false });
       },
-      onOk: (values) => {
+      onOk: values => {
         console.log(values, '---onOk');
         // 自定义组件（自加一）
         // json.maxMinNum = JSON.stringify(json.maxMinNum);
       },
       buttonConfig: {
         // 若为false则该表单没有按钮
-        showCancelBtn: true, //是否显示取消按钮
-        showOkBtn: true, //是否显示确定按钮
-        beforeCustomChildren: () => {
-          //确定按钮之前的自定义按钮
-          return (
-            <Button
-              onClick={() => {
-                this.popFormIns.myform.formRef.resetFields();
-              }}
-              style={{ marginRight: 16 }}
-            >
-              重置
-            </Button>
-          );
-        },
-        afterCustomChildren: () => null, //确定按钮之后的自定义按钮
+        showCancelBtn: true, // 是否显示取消按钮
+        showOkBtn: true, // 是否显示确定按钮
+        beforeCustomChildren: () => (
+          // 确定按钮之前的自定义按钮
+          <Button
+            onClick={() => {
+              this.popFormIns.myform.formRef.resetFields();
+            }}
+            style={{ marginRight: 16 }}
+          >
+            重置
+          </Button>
+        ),
+        afterCustomChildren: () => null, // 确定按钮之后的自定义按钮
         style: {},
       },
     };
   };
 
   render() {
-    var censor = function(key, value) {
-      if (typeof value == 'function') {
+    const censor = function(key, value) {
+      if (typeof value === 'function') {
         return Function.prototype.toString.call(value);
       }
       return value;
@@ -830,12 +796,10 @@ export default class PopFormTest extends React.Component {
               简单版
             </Button>
 
-            <PopForm
-              initData={this.initData1()}
-              modalVisible={this.state.modalVisible1}
-            />
+            <PopForm initData={this.initData1()} modalVisible={this.state.modalVisible1} />
 
-            <CodeStatus>{`
+            <CodeStatus>
+              {`
 import { PopForm } from "cake-ui"
 
 const initData=${JSON.stringify(this.initData1(), censor, 2)}
@@ -844,7 +808,8 @@ const initData=${JSON.stringify(this.initData1(), censor, 2)}
   initData={initData}
   modalVisible={this.state.modalVisible1}
 />
-            `}</CodeStatus>
+            `}
+            </CodeStatus>
           </div>
 
           {/* 复杂版 */}
@@ -858,16 +823,14 @@ const initData=${JSON.stringify(this.initData1(), censor, 2)}
               新增（复杂版）
             </Button>
 
-            <PopForm
-              initData={this.addModalInitData2}
-              modalVisible={this.state.modalVisible2}
-            >
+            <PopForm initData={this.addModalInitData2} modalVisible={this.state.modalVisible2}>
               <div style={{ padding: '10px 24px 0', color: '#1890ff' }}>
                 完善信息后可用新验证登录
               </div>
             </PopForm>
 
-            <CodeStatus>{`
+            <CodeStatus>
+              {`
 import { PopForm } from "cake-ui"
 
 const initData=${JSON.stringify(this.addModalInitData2, null, 2)}
@@ -878,7 +841,8 @@ const initData=${JSON.stringify(this.addModalInitData2, null, 2)}
 >
   <div style={{padding:"10px 24px 0",color:"#1890ff"}}>完善信息后可用新验证登录</div>
 </PopForm>
-            `}</CodeStatus>
+            `}
+            </CodeStatus>
           </div>
         </div>
 

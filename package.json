@@ -8,7 +8,6 @@
     "clean:commonjs": "rimraf lib",
     "clean:umd": "rimraf dist",
     "clean:esm": "rimraf esm",
-    "clean:exdist": "rimraf doc/dist",
     "clean:coverage": "rimraf coverage",
     "clean": "npm-run-all clean:*",
     "create-github-release": "conventional-github-releaser -p angular",
@@ -22,10 +21,11 @@
     "release": "standard-version --sign",
     "test": "cross-env BABEL_OUTPUT=commonjs jest",
     "codecov": "codecov",
+    "cleanDoc": "rimraf docs/dist",
     "startDoc": "webpack-dev-server --inline --content-base docs/ --config webpack.config.doc.js",
     "buildDoc": "cross-env NODE_ENV=production webpack --config webpack.config.doc.js",
     "website": "run-s website:clean website:build",
-    "website:clean": "rimraf doc/dist",
+    "website:clean": "rimraf docs/dist",
     "website:build": "cross-env NODE_ENV=production webpack"
   },
   "repository": {
